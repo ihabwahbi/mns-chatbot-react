@@ -125,7 +125,7 @@ export default function Hero() {
                             }}
                         >
                             <Typography variant="body1" textAlign="center" color="text.secondary">
-                                {response || "This is an example of multiline text that is centered within a full-width box with a light background. You can adjust the text as needed or add more content here."}
+                                {response || "The answer will appear here"}
                             </Typography>
                         </Box>
                     </Box>
