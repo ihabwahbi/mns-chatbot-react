@@ -112,7 +112,7 @@ export default function Hero() {
                             />
                         </Box>
                     </Stack>
-                    <Button onClick={handleSubmit}>Send</Button>
+                    <Button ref={buttonRef} onClick={handleSubmit}>Send</Button>
                     <Box
                         sx={{
                             display: 'flex',
