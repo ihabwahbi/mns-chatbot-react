@@ -1,0 +1,75 @@
+.container {
+  background-color: #181a1b;
+  /* Slightly darker background */
+  color: #f0f0f0;
+  /* Off-white text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  /* A modern sans-serif font */
+  padding: 30px;
+  /* Add spacing around content */
+}
+
+input[type="text"] {
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  /* Subtle border */
+  margin-bottom: 20px;
+  width: 80%;
+  /* Wide input field */
+  max-width: 500px;
+  /* Restrict max width for responsiveness */
+  background-color: #202124;
+  /* Match the theme */
+  color: #f0f0f0;
+  /* Consistent text color */
+}
+
+button[type="submit"] {
+  background-color: #5cb85c;
+  /* More vibrant green */
+  color: white;
+  padding: 15px 30px;
+  /* Increased padding */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 80%;
+  /* Wide button */
+  max-width: 500px;
+  transition: background-color 0.3s ease;
+  /* Smooth hover effect */
+}
+
+button[type="submit"]:hover {
+  background-color: #4cae4c;
+  /* Darker green on hover */
+}
+
+.response-text {
+  margin-top: 20px;
+  padding: 20px;
+  /* More internal spacing */
+  background-color: #282c34;
+  /* Slightly lighter response box */
+  border-radius: 8px;
+  width: 80%;
+  /*  Match input field width */
+  max-width: 500px;
+}
+
+.heading {
+  color: #e0e0e0;
+  /* Lighter text for the heading */
+  font-size: 36px;
+  /* Make the heading prominent */
+  margin-bottom: 40px;
+  /* Space between heading and form */
+  text-align: center;
+  /* Center the heading */
+}
