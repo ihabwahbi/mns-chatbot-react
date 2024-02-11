@@ -4,14 +4,15 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 export default function Hero() {
     const [question, setQuestion] = useState(''); // State to store the input value
     const [response, setResponse] = useState('');
+    const buttonRef = useRef(null);
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-            handleSubmit();
+            buttonRef.current.click(); // Programmatically click the button
         }
     };
 
