@@ -9,7 +9,11 @@ import React, { useState } from 'react';
 export default function Hero() {
     const [question, setQuestion] = useState(''); // State to store the input value
     const [response, setResponse] = useState('');
-
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    };
 
     const handleInputChange = (event) => {
         setQuestion(event.target.value); // Update state with input value
@@ -98,7 +102,7 @@ export default function Hero() {
                                 maxWidth: '100%',
                             }}
                         >
-                            <TextField
+                            <TextField onKeyDown={handleKeyDown}
                                 fullWidth
                                 label="Ask me anything..."
                                 id="fullWidth"
