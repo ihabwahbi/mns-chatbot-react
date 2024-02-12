@@ -13,6 +13,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 import React, { useState, useRef, useEffect } from 'react';
 import Introduction from './Introduction';
 
+
 export default function Hero() {
     const [question, setQuestion] = useState(''); // State to store the input value
     const [response, setResponse] = useState('');
@@ -108,13 +109,13 @@ export default function Hero() {
                             <Typography
                                 variant="subtitle2"
                                 component="div"
-                                sx={{ fontWeight: 'bold' }}>
+                                sx={{ fontWeight: 'bold', color: '#333', fontFamily: 'Roboto, Arial, sans-serif', }}>
                                 {message.sender} {/* Displays the sender name */}
                             </Typography>
                             <Typography
                                 variant="body1"
 
-                                sx={{  /* Indent message content for visual hierarchy */ }}>
+                                sx={{ color: '#333', fontFamily: 'Roboto, Arial, sans-serif',/* Indent message content for visual hierarchy */ }}>
                                 {message.content} {/* Displays the message content */}
                             </Typography>
                         </Box>
