@@ -6,12 +6,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import PendingIcon from '@mui/icons-material/Pending';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Introduction from './Introduction';
 
 export default function Hero() {
     const [question, setQuestion] = useState(''); // State to store the input value
-    const [response, setResponse] = useState('');
+    const messagesEndRef = useRef(null);
     const [isLoading, setIsLoading] = useState(false);
     const [messages, setMessages] = useState([]);
     const [firstQuestionSubmitted, setFirstQuestionSubmitted] = useState(false);
@@ -48,7 +48,7 @@ export default function Hero() {
             }
             const data = await response.json();
             console.log('Success:', data);
-            setResponse(data.message); // Update the response state with data from backend
+
             setMessages(prevMessages => [
                 ...prevMessages,
                 { type: 'response', content: data.message, sender: 'AI Assistant' }
@@ -62,9 +62,8 @@ export default function Hero() {
 
     };
     useEffect(() => {
-        console.log(messages); // Logs updated state after changes
-    }, [messages]); // This effect depends on `messages`, so it runs after `messages` changes
-
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
     return (
         <Box
             id="hero"
@@ -113,6 +112,9 @@ export default function Hero() {
                                 sx={{ color: '#333', fontFamily: 'Roboto, Arial, sans-serif',/* Indent message content for visual hierarchy */ }}>
                                 {message.content} {/* Displays the message content */}
                             </Typography>
+                            {index === messages.length - 1 && (
+                                <div ref={messagesEndRef} /> // Invisible element attached at the end of the message list
+                            )}
                         </Box>
                     ))}
                 </Box>}
