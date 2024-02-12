@@ -4,15 +4,25 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import React, { useState, useRef } from 'react';
+import LoadingButton from '@mui/lab/LoadingButton';
+import TextareaAutosize from 'react-textarea-autosize';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import PendingIcon from '@mui/icons-material/Pending';
+import React, { useState, useRef, useEffect } from 'react';
+import Introduction from './Introduction';
 
 export default function Hero() {
     const [question, setQuestion] = useState(''); // State to store the input value
     const [response, setResponse] = useState('');
-    const buttonRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [messages, setMessages] = useState([]);
+    const [firstQuestionSubmitted, setFirstQuestionSubmitted] = useState(false);
     const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            buttonRef.current.click(); // Programmatically click the button
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault(); // Prevent the default action (inserting a new line)
+            handleSubmit(); // Call your submit function
         }
     };
 
@@ -21,6 +31,13 @@ export default function Hero() {
     };
 
     const handleSubmit = async () => {
+        setIsLoading(true); // Start loading
+        setFirstQuestionSubmitted(true);
+        setQuestion('');
+        setMessages(prevMessages => [
+            ...prevMessages,
+            { type: 'question', content: question, sender: 'You' }
+        ]);
         const url = 'https://mns-chatbot-backend.azurewebsites.net/api/mns_chatbot_function?code=4qM80F22ntJtNsbyiHHcwianGVNgpwBFh2KofOQsMebiAzFuBhLvnA=='; // Adjust as needed
         try {
             const response = await fetch(url, {
@@ -36,107 +53,136 @@ export default function Hero() {
             const data = await response.json();
             console.log('Success:', data);
             setResponse(data.message); // Update the response state with data from backend
+            setMessages(prevMessages => [
+                ...prevMessages,
+                { type: 'response', content: data.message, sender: 'AI Assistant' }
+            ]);
+
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setIsLoading(false); // Stop loading regardless of success or error
         }
+
     };
+    useEffect(() => {
+        console.log(messages); // Logs updated state after changes
+    }, [messages]); // This effect depends on `messages`, so it runs after `messages` changes
+
     return (
         <Box
             id="hero"
-            sx={(theme) => ({
-                width: '100%',
-                backgroundImage:
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start', // Distribute space between items
+                alignItems: 'center',
+                height: '90vh', // Use 100vh to ensure it takes the full viewport height
+                overflow: 'hidden', // Prevents the outer box from scrolling
+
+                p: 1,
+                backgroundImage: (theme) =>
                     theme.palette.mode === 'light'
                         ? 'linear-gradient(180deg, #CEE5FD, #FFF)'
                         : 'linear-gradient(#02294F, #090E10)',
                 backgroundSize: '100% 20%',
                 backgroundRepeat: 'no-repeat',
-            })}
+
+            }}
         >
-            <Container
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    pt: { xs: 14, sm: 20 },
-                    pb: { xs: 8, sm: 12 },
-                }}
-            >
-                <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
-                    <Typography
-                        component="h1"
-                        variant="h2"
-                        sx={{
-                            display: 'flex',
-                            flexDirection: { xs: 'column', md: 'row' },
-                            alignSelf: 'center',
-                            textAlign: 'center',
-                        }}
-                    >
-                        M&S&nbsp;
-                        <Typography
-                            component="span"
-                            variant="h2"
-                            sx={{
-                                color: (theme) =>
-                                    theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
-                            }}
-                        >
-                            AI Assistant
-                        </Typography>
-                    </Typography>
-                    <Typography variant="body1" textAlign="center" color="text.secondary">
-                        Explore this cutting-edge chatbot, delivering high-quality answers
-                        tailored to your needs. <br />
-                        Type your question below.
-                    </Typography>
-                    <Stack
-                        direction={{ xs: 'column', sm: 'row' }}
-                        alignSelf="center"
-                        spacing={1}
-                        useFlexGap
-                        sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
-                    >
-                        <Box
-                            sx={{
-                                width: 500,
-                                maxWidth: '100%',
-                            }}
-                        >
-                            <TextField onKeyDown={handleKeyDown}
-                                fullWidth
-                                label="Ask me anything..."
-                                id="fullWidth"
-                                value={question}
-                                onChange={handleInputChange}
-                            />
-                        </Box>
-                    </Stack>
-                    <Button ref={buttonRef} onClick={handleSubmit}>Send</Button>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            width: '100%', // Full width
-                            p: 1, // Padding for the outer Box, adjust as needed
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                backgroundColor: '#f5f5f5', // Use a theme background color
-                                p: 2, // Padding around the text, adjust as needed
-                                borderRadius: '4px', // Optional: adds rounded corners
-                            }}
-                        >
-                            <Typography variant="body1" textAlign="center" color="text.secondary">
-                                {response || "The answer will appear here"}
+            {
+                firstQuestionSubmitted && <Box
+                    sx={{
+                        width: '80%', // Consistent with your styling
+                        maxHeight: '70vh', // Adjust based on your needs
+                        overflowY: 'auto', // Enables scrolling for overflow
+                        flexGrow: 1, // Allows box to expand, filling available space above the input
+                        mb: 2, // Margin bottom to separate from input field
+                        mt: 4,
+                        maxWidth: 'lg',
+                    }}
+                >
+
+                    {messages.map((message, index) => (
+                        <Box key={index} sx={{ mb: 2 /* Adjusted for clearer separation between messages */ }}>
+                            <Typography
+                                variant="subtitle2"
+                                component="div"
+                                sx={{ fontWeight: 'bold' }}>
+                                {message.sender} {/* Displays the sender name */}
+                            </Typography>
+                            <Typography
+                                variant="body1"
+
+                                sx={{  /* Indent message content for visual hierarchy */ }}>
+                                {message.content} {/* Displays the message content */}
                             </Typography>
                         </Box>
-                    </Box>
-                </Stack>
+                    ))}
+                </Box>}
+            {!firstQuestionSubmitted && <Box
+                sx={{
+                    width: '90%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh'
+                }}
+            >
 
-            </Container>
+                <Introduction />
+
+            </Box>
+            }
+
+
+            <Box
+                sx={{
+                    mt: 'auto', // This pushes the Box to the bottom
+                    width: '90%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <TextField maxwidth='lg'
+                    onKeyDown={handleKeyDown}
+                    fullWidth
+                    label="Ask me anything..."
+                    id="fullWidth"
+                    value={question}
+                    onChange={handleInputChange}
+                    multiline
+                    disabled={isLoading} // Disable TextField while loading
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={handleSubmit}
+                                    edge="end"
+                                    aria-label="submit"
+                                    disabled={isLoading} // Disable IconButton while loading
+                                >
+                                    {isLoading ? (
+                                        <PendingIcon fontSize="large" /> // Show loading icon when isLoading is true
+                                    ) : (
+                                        <ArrowUpwardIcon color="primary" fontSize="large" /> // Default icon
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                        // If you're using TextareaAutosize and want it to be disabled as well, consider managing its enabled state similarly.
+                        inputComponent: TextareaAutosize,
+                        inputProps: {
+                            minRows: 1,
+                            maxRows: 5,
+                        },
+                    }}
+                    sx={{
+                        maxWidth: 'lg', // This sets the maximum width. For specific values, use a valid CSS value, e.g., maxWidth: 500 (for 500px).
+                    }}
+                />
+            </Box>
         </Box>
+
     );
 }
