@@ -1,16 +1,6 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import TextareaAutosize from 'react-textarea-autosize';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import PendingIcon from '@mui/icons-material/Pending';
-import React, { useState, useRef, useEffect } from 'react';
 
 export default function Introduction() {
     return (
