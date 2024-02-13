@@ -72,7 +72,10 @@ export default function Hero() {
                 flexDirection: 'column',
                 justifyContent: 'flex-start', // Distribute space between items
                 alignItems: 'center',
-                height: '80vh', // Use 100vh to ensure it takes the full viewport height
+                height: {
+                    xs: '80vh', // On extra-small devices (phones)
+                    md: '90vh', // On medium devices (tablets and small desktops) and up
+                },
                 overflow: 'hidden', // Prevents the outer box from scrolling
 
                 p: 1,
