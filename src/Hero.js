@@ -96,6 +96,7 @@ export default function Hero() {
                         mb: 2, // Margin bottom to separate from input field
                         mt: 4,
                         maxWidth: 'lg',
+                        paddingBottom: 'env(safe-area-inset-bottom)',
                     }}
                 >
 
@@ -125,7 +126,8 @@ export default function Hero() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '100vh'
+                    height: '100vh',
+                    paddingBottom: 'env(safe-area-inset-bottom)',
                 }}
             >
 
@@ -178,7 +180,7 @@ export default function Hero() {
                         },
                     }}
                     sx={{
-                        maxWidth: 'lg', // This sets the maximum width. For specific values, use a valid CSS value, e.g., maxWidth: 500 (for 500px).
+                        maxWidth: 'lg', paddingBottom: 'env(safe-area-inset-bottom)',// This sets the maximum width. For specific values, use a valid CSS value, e.g., maxWidth: 500 (for 500px).
                     }}
                 />
             </Box>

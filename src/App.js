@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 
 function App() {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', paddingBottom: 'env(safe-area-inset-bottom)', }}>
       <ResponsiveAppBar></ResponsiveAppBar>
       <Hero></Hero>
     </Box>
