@@ -34,7 +34,7 @@ export default function Hero() {
             ...prevMessages,
             { type: 'question', content: question, sender: 'You' }
         ]);
-        const url = 'https://mns-chatbot-backend.azurewebsites.net/api/mns_chatbot_function?code=4qM80F22ntJtNsbyiHHcwianGVNgpwBFh2KofOQsMebiAzFuBhLvnA=='; // Adjust as needed
+        const url = 'https://mns-chatbot-backend.azurewebsites.net/api/mns-chatbot-function?code=tp9MuKM6kSVavitcJSBwvflu0-fZNS7dQiBGhvm9ur7LAzFu46AbcA=='; // Adjust as needed
         try {
             const response = await fetch(url, {
                 method: 'POST',
