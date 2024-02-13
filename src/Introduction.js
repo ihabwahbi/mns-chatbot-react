@@ -20,8 +20,7 @@ export default function Introduction() {
                     component="span"
                     variant="h2"
                     sx={{
-                        color: (theme) =>
-                            theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
+                        color: '#0014db',
                     }}
                 >
                     AI Assistant
