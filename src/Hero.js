@@ -73,7 +73,7 @@ export default function Hero() {
                 justifyContent: 'flex-start', // Distribute space between items
                 alignItems: 'center',
                 paddingBottom: 'env(safe-area-inset-bottom)',
-                height: '90vh',
+
                 overflow: 'hidden', // Prevents the outer box from scrolling
 
                 p: 1,
@@ -141,6 +141,7 @@ export default function Hero() {
                     width: '90%',
                     display: 'flex',
                     justifyContent: 'center',
+                    paddingBottom: 'env(safe-area-inset-bottom)',
                 }}
             >
                 <TextField maxwidth='lg'
