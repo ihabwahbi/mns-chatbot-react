@@ -72,10 +72,9 @@ export default function Hero() {
                 flexDirection: 'column',
                 justifyContent: 'flex-start', // Distribute space between items
                 alignItems: 'center',
-                paddingBottom: 'env(safe-area-inset-bottom)',
                 height: {
-                    xs: '90vh',
-                    md: '100vh'
+                    xs: '80vh',
+                    md: '90vh'
                 },
                 overflow: 'hidden', // Prevents the outer box from scrolling
 
@@ -99,7 +98,6 @@ export default function Hero() {
                         mb: 2, // Margin bottom to separate from input field
                         mt: 4,
                         maxWidth: 'lg',
-                        paddingBottom: 'env(safe-area-inset-bottom)',
                     }}
                 >
 
@@ -130,7 +128,6 @@ export default function Hero() {
                     justifyContent: 'center',
                     alignItems: 'center',
                     height: '100vh',
-                    paddingBottom: 'env(safe-area-inset-bottom)',
                 }}
             >
 
@@ -146,7 +143,6 @@ export default function Hero() {
                     width: '90%',
                     display: 'flex',
                     justifyContent: 'center',
-                    paddingBottom: 'env(safe-area-inset-bottom)',
                 }}
             >
                 <TextField maxwidth='lg'
@@ -183,7 +179,7 @@ export default function Hero() {
                         },
                     }}
                     sx={{
-                        maxWidth: 'lg', paddingBottom: 'env(safe-area-inset-bottom)',// This sets the maximum width. For specific values, use a valid CSS value, e.g., maxWidth: 500 (for 500px).
+                        maxWidth: 'lg' // This sets the maximum width. For specific values, use a valid CSS value, e.g., maxWidth: 500 (for 500px).
                     }}
                 />
             </Box>
