@@ -46,7 +46,7 @@ function ResponsiveAppBar() {
                     bgcolor: '#0014db'
                 }}>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-                        <img src={logo} alt="Logo" style={{ height: 75 }} />
+                        <img src={logo} alt="Logo" style={{ height: 50 }} />
                     </Box>
 
 
@@ -87,7 +87,7 @@ function ResponsiveAppBar() {
                         </Menu>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-                        <img src={logo} alt="Logo" style={{ height: 75 }} />
+                        <img src={logo} alt="Logo" style={{ height: 50 }} />
                     </Box>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
