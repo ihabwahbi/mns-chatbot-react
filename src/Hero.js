@@ -73,7 +73,10 @@ export default function Hero() {
                 justifyContent: 'flex-start', // Distribute space between items
                 alignItems: 'center',
                 paddingBottom: 'env(safe-area-inset-bottom)',
-
+                height: {
+                    xs: '90vh',
+                    md: '100vh'
+                },
                 overflow: 'hidden', // Prevents the outer box from scrolling
 
                 p: 1,
